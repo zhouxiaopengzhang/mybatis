@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <!-- 为这个mapper指定一个唯一的namespace，namespace的值习惯上设置成包名+sql映射文件名，这样 就能够保
+  证namespace的值是唯一的,例如namespace="me.gacl.mapping.userMapper"就是me.gacl.mapping(包
+ 名)+userMapper(userMapper.xml文件去除后缀) -->
+<mapper namespace="org.zxp.studentMapper">
+<!-- 在select标签中编写查询的SQL语句， 设置select标签的id属性为getUser，id属性值必须是唯一的，不能够重复
+     使用parameterType属性指明查询时使用的参数类型，resultType属性指明查询返回的结果集类型
+     resultType="me.gacl.domain.User"就表示将查询结果封装成一个User类的对象返回
+     Student类就是Student表所对应的实体类 -->
+     <!--  查询学生：根据id查询得到一个Student对象 -->
+     <select id="selectStudent" parameterType="Integer" resultType="entity.Student">
+        select * from student where id=#{id}
+     </select>
+     <!-- 添加学生 -->
+     <insert id="insertStudent" parameterType="entity.Student">
+     	insert into student(id,name,sex,classmate) values(#{id},#{name},#{sex},#{classmate})
+     </insert>
+     <!-- 删除学生 -->
+     <delete id="deleteStudent" parameterType="Integer">
+     	delete from student where id=#{id}
+     </delete>
+     <!-- 修改学生 -->
+     <update id="updateStudent" parameterType="entity.Student">
+     	update student set name=#{name},sex=#{sex},classmate=#{classmate} where id=#{id}
+     </update>
+     <!-- 查询所有用户信息 -->
+     <select id="selectAllStudent" resultType="entity.Student">
+     	select * from student
+     </select>
+     <!-- 启用二级缓存 -->
+     <cache></cache>
+</mapper>
